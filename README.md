@@ -165,10 +165,20 @@ If time jump is detected (the timestamp of the performance data as reported in t
 
 ---
 
+## Signals
+### SIGUSR1
+Upon receiving SIGUSR1 the process dumps the internal collected metric data to either standard output or to a file as given by the `-dump-file`.
+Each signal replaces the content of the dump file, if the file can't be opened for writing, no error is given.
+
+The internal data is written as CSV and include the internal age of each metric and can be used to adjust the expiration timer if needed.
+
+---
+
 ## Command line parameters
 prometheus-icinga2perfdata-exporter supports the following command line parameters:
 
   * `-config-file` - location of the configuration file, default: `/etc/prometheus/prometheus-icinga2perfdata-exporter.ini`
+  * `-dump-file` - File to write internal dump after receiving SIGUSR1
   * `-help` - displays a short help text
   * `-listen-address` - address to listen for requests, default: `:19997`
 
